@@ -20,6 +20,6 @@ git submodule update --init
 chown vagrant "$TEMP_DIR"
 sudo -u vagrant ./install.sh -d
 cd -
-rm -rf TEMP_DIR
+rm -rf "$TEMP_DIR"
 
 fi # $SHELL_FEATURES_SH
