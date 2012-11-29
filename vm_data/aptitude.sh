@@ -1,6 +1,8 @@
 if test -z "$APTITUDE_SH"; then
 APTITUDE_SH=yes
 
+. "$(pwd)"/backports.sh
+
 aptitude update
 
 apti() {
