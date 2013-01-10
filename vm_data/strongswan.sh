@@ -11,11 +11,11 @@ apti subversion libjansson-dev build-essential automake libtool libgmp3-dev \
 
 if test ! -d "strongswan_styx"; then
     svn checkout $SS_URL strongswan_styx
+    cd "strongswan_styx/strongswan"
+    ./autogen.sh
+    ./configure --prefix=/usr --sysconfdir=/etc --enable-styx
+    make
 fi
-cd "strongswan_styx/strongswan"
-./autogen.sh
-./configure --prefix=/usr --sysconfdir=/etc --enable-styx
-make
 make install
 cd -
 
