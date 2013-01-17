@@ -15,7 +15,10 @@ if test ! -d "strongswan_styx"; then
     ./autogen.sh
     ./configure --prefix=/usr --sysconfdir=/etc --enable-styx
     make
+    cd -
 fi
+
+cd "strongswan_styx/strongswan"
 make install
 cd -
 
