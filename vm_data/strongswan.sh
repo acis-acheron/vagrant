@@ -9,13 +9,18 @@ SS_URL=svn://svn.forge.objectweb.org/svnroot/contrail/trunk/resource/strongswan
 apti subversion libjansson-dev build-essential automake libtool libgmp3-dev \
      libsoup2.4-dev bison flex gperf libreadline-dev
 
-if test ! -d "strongswan_styx"; then
-    svn checkout $SS_URL strongswan_styx
+if test ! -d "strongswan_styx_prebuilt"; then
+    rm -rf "strongswan_styx"
+    svn checkout $SS_URL "strongswan_styx"
     cd "strongswan_styx/strongswan"
     ./autogen.sh
     ./configure --prefix=/usr --sysconfdir=/etc --enable-styx
     make
     cd -
+    cp -r "strongswan_styx" "strongwan_styx_prebuilt"
+else
+    rm -rf "strongswan_styx"
+    cp -r "strongwan_styx_prebuilt" "strongswan_styx"
 fi
 
 cd "strongswan_styx/strongswan"
