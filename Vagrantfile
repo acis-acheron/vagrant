@@ -3,6 +3,7 @@ def base_config(config)
     config.vm.box = "squeeze32"
     config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/" \
                         "debian_squeeze_32.box"
+    config.vm.customize ["modifyvm", :id, "--memory", 256]
     config.vm.share_folder "data", "/config_data", "vm_data"
                            # identifier, guest path, host path
     config.vm.provision :shell, :inline => "cd /config_data; sh main.sh"
