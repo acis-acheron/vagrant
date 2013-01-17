@@ -6,7 +6,7 @@ GROUPVPN_SH=yes
 # Backup the resolv.conf file which groupvpn replaces
 cp /etc/resolv.conf /etc/resolv.conf.bak
 
-apti mono-complete
+apti mono-complete resolvconf
 debi ipop-squeeze.deb
 groupvpn_prepare.sh demo-groupvpn-config.zip
 /etc/init.d/groupvpn.sh start
