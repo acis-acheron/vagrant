@@ -7,7 +7,15 @@ GROUPVPN_SH=yes
 cp /etc/resolv.conf /etc/resolv.conf.bak
 
 apti mono-complete resolvconf
+
+# Force the installation of the ipop package
 debi ipop-squeeze.deb
+
+# Use apt-get which will opt to install the unmet
+# dependencies by default (whereas aptitude will 
+# opt to remove the ipop package)
+apt-get install -fy
+
 groupvpn_prepare.sh demo-groupvpn-config.zip
 /etc/init.d/groupvpn.sh start
 

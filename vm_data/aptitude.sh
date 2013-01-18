@@ -9,9 +9,7 @@ apti() {
     aptitude install -y -q=9 "$@"
 }
 debi() {
-    gdebi -n "$@"
+    dpkg -i --force-depends "$@"
 }
-
-apti gdebi
 
 fi # $APTITUDE_SH
