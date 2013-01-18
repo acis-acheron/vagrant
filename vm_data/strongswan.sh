@@ -17,10 +17,10 @@ if test ! -d "strongswan_styx_prebuilt"; then
     ./configure --prefix=/usr --sysconfdir=/etc --enable-styx
     make
     cd -
-    cp -r "strongswan_styx" "strongwan_styx_prebuilt"
+    cp -r "strongswan_styx" "strongswan_styx_prebuilt"
 else
     rm -rf "strongswan_styx"
-    cp -r "strongwan_styx_prebuilt" "strongswan_styx"
+    cp -r "strongswan_styx_prebuilt" "strongswan_styx"
 fi
 
 cd "strongswan_styx/strongswan"
