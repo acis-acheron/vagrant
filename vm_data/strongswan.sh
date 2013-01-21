@@ -13,14 +13,17 @@ apti subversion libjansson-dev build-essential automake libtool libgmp3-dev \
 # The answer is: VirtualBox shared folders do not play nice with symlinks.
 # This entire script is one, giant, ugly, workaround.
 
-if test -d "strongswan_styx"; then
-   rm -rf "strongswan_styx"
-fi
-
 if test ! -e "strongswan_cache.tar"; then
     TEMP_DIR="$(mktemp -d)"
     cd "$TEMP_DIR"
     svn checkout $SS_URL "strongswan_styx"
+    cd -
+    cd "$TEMP_DIR/strongswan_styx/strongswan"
+    ./autogen.sh
+    ./configure --prefix=/usr --sysconfdir=/etc --enable-styx
+    make
+    cd -
+    cd "$TEMP_DIR"
     tar cvf strongswan_cache.tar strongswan_styx
     cd -
     cp "$TEMP_DIR/strongswan_cache.tar" .
@@ -33,9 +36,6 @@ cd "$TEMP_DIR"
 tar xvf strongswan_cache.tar
 cd -
 cd "$TEMP_DIR/strongswan_styx/strongswan"
-./autogen.sh
-./configure --prefix=/usr --sysconfdir=/etc --enable-styx
-make
 make install
 
 cd -
