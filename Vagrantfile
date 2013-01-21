@@ -6,6 +6,12 @@ def base_config(config)
     config.vm.customize ["modifyvm", :id, "--memory", 256]
     config.vm.share_folder "data", "/config_data", "vm_data"
                            # identifier, guest path, host path
+    # VirtualBox 4.1.8 disables symlinks for shared data folders by default
+    # This breaks svn, and basically every other POSIX-compatible program.
+    config.vm.customize ["setextradata", 
+                         :id,
+                         "VBoxInternal2/SharedFoldersEnableSymlinksCreate/data",
+                         "1"]
     config.vm.provision :shell, :inline => "cd /config_data; sh main.sh"
 end
     
@@ -23,3 +29,4 @@ Vagrant::Config.run do |config|
         bob_config.vm.host_name = "vagrant-bob"
     end
 end
+
