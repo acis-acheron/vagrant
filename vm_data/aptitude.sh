@@ -8,8 +8,5 @@ aptitude update
 apti() {
     aptitude install -y -q=9 "$@"
 }
-debi() {
-    dpkg -i --force-depends "$@"
-}
 
 fi # $APTITUDE_SH

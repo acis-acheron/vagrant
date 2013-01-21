@@ -9,7 +9,18 @@ cp /etc/resolv.conf /etc/resolv.conf.bak
 apti mono-complete resolvconf
 
 # Force the installation of the ipop package
-debi ipop-squeeze.deb
+if test ! -e "ipop-squeeze.deb.tar"; then
+  tar cvf ipop-squeeze.deb.tar ipop-squeeze.deb
+fi
+
+# Hacktastic Mr. Hacky Hackerson.
+TEMP_DIR="$(mktemp -d)"
+cp ipop-squeeze.deb.tar "$TEMP_DIR"
+cd "$TEMP_DIR"
+tar xvf ipop-squeeze.deb.tar 
+dpkg -i --force-depends ipop-squeeze.deb
+cd -
+rm -rf "$TEMP_DIR"
 
 # Use apt-get which will opt to install the unmet
 # dependencies by default (whereas aptitude will 
