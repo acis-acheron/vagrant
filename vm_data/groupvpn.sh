@@ -33,6 +33,7 @@ done
 apt-get install -fy
 
 groupvpn_prepare.sh demo-groupvpn-config.zip
+update-rc.d groupvpn.sh defaults # groupvpn should really do this
 /etc/init.d/groupvpn.sh start
 
 # Fix the resolv.conf from our backup, use resolvconf
