@@ -1,3 +1,5 @@
 *.py[cod]
 .vagrant
 vm_data/strongswan_styx
+vm_data/ipop-squeeze.deb.tar
+vm_data/strongswan_cache.tar
