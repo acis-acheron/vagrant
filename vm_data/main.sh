@@ -4,3 +4,6 @@
 . "$(pwd)"/strongswan.sh # build and install strongswan (don't configure)
 # Installing groupvpn breaks networking?
 . "$(pwd)"/groupvpn.sh # install and configure groupvpn
+# Install acheron last
+cd acheron; ./install.sh; cd -
+/etc/init.d/acheron start
