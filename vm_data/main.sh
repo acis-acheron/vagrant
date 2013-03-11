@@ -6,4 +6,6 @@
 . "$(pwd)"/groupvpn.sh # install and configure groupvpn
 # Install acheron last
 cd acheron; ./install.sh; cd -
+/etc/init.d/ipsec start
+/etc/init.d/groupvpn.sh start
 /etc/init.d/acheron start
