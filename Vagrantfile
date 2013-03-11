@@ -1,10 +1,9 @@
 # performs the common configuration tasks on the VMs
 def base_config(config)
-    config.vm.box = "squeeze32"
-    config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/" \
-                        "debian_squeeze_32.box"
+    config.vm.box = "new_squeeze32"
+    config.vm.box_url = "/opt/new_squeeze32.box"
     config.vm.customize ["modifyvm", :id, "--memory", 256]
-    config.vm.share_folder "data", "/config_data", "vm_data"
+    config.vm.share_folder "data", "/config_data", "vm_data", :nfs => true
                            # identifier, guest path, host path
     # VirtualBox 4.1.8 disables symlinks for shared data folders by default
     # This breaks svn, and basically every other POSIX-compatible program.
