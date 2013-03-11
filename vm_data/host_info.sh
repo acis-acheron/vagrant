@@ -3,12 +3,14 @@ HOST_INFO_SH=yes
 
 HOSTNAME="$(hostname)"
 
+IS_ALICE=false
+IS_BOB=false
 case "$HOSTNAME" in
     "vagrant-alice")
-        IS_ALICE=yes
+        export IS_ALICE=true
         ;;
     "vagrant-bob")
-        IS_BOB=yes
+        export IS_BOB=true
         ;;
     *)
         echo "Error: Unknown hostname" 1>&2
