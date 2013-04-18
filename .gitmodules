@@ -1,3 +1,3 @@
 [submodule "vm_data/acheron"]
 	path = vm_data/acheron
-	url = https://github.com/thomdixon/acheron.git
+	url = https://github.com/acis-acheron/acheron.git
