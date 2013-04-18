@@ -12,7 +12,7 @@ export DEBIAN_FRONTEND
 apti racoon ipsec-tools
 
 cp -r default-racoon-config/* /
-if $IS_ALPHA; then
+1if $IS_ALPHA; then
     cp -r demo-alpha-ipsec-certs/* /
 elif $IS_BETA; then
     cp -r demo-beta-ipsec-certs/* /
@@ -22,3 +22,7 @@ fi
 
 # Install and configure IPOP
 . "$(pwd)"/groupvpn.sh
+
+cd "$(pwd)"/acheron
+./install.sh
+cd -
