@@ -9,7 +9,8 @@ end
 
 Vagrant.configure("2") do |config|
     config.vm.box = "squeeze32-nfs-mono"
-    config.vm.box_url = "/opt/squeeze32-nfs-mono.box"
+    config.vm.box_url =
+        "cise.ufl.edu/~woodruff/downloads/acis/squeeze32-nfs-mono.box"
        
     config.vm.define :alice do |alice_config|
         base_config alice_config
