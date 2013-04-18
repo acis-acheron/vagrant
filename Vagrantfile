@@ -1,31 +1,26 @@
-# performs the common configuration tasks on the VMs
 def base_config(config)
-    config.vm.box = "new_squeeze32"
-    config.vm.box_url = "/opt/new_squeeze32.box"
-    config.vm.customize ["modifyvm", :id, "--memory", 256]
-    config.vm.share_folder "data", "/config_data", "vm_data", :nfs => true
-                           # identifier, guest path, host path
-    # VirtualBox 4.1.8 disables symlinks for shared data folders by default
-    # This breaks svn, and basically every other POSIX-compatible program.
-    config.vm.customize ["setextradata", 
-                         :id,
-                         "VBoxInternal2/SharedFoldersEnableSymlinksCreate/data",
-                         "1"]
+    config.vm.synced_folder "vm_data", "/config_data", :nfs => true
     config.vm.provision :shell, :inline => "cd /config_data; sh main.sh"
+   
+    config.vm.provider :virtualbox do |vbox|
+        vbox.customize ["modifyvm", :id, "--memory", 256]
+    end
 end
-    
 
-Vagrant::Config.run do |config|
+Vagrant.configure("2") do |config|
+    config.vm.box = "squeeze32-nfs-mono"
+    config.vm.box_url = "/opt/squeeze32-nfs-mono.box"
+       
     config.vm.define :alice do |alice_config|
         base_config alice_config
-        alice_config.vm.network :hostonly, "192.168.56.101"
-        alice_config.vm.host_name = "vagrant-alice"
+        config.vm.network :private_network, ip: "192.168.56.101"
+        alice_config.vm.hostname = "vagrant-alice"
     end
-    
+
     config.vm.define :bob do |bob_config|
         base_config bob_config
-        bob_config.vm.network :hostonly, "192.168.56.102"
-        bob_config.vm.host_name = "vagrant-bob"
+        config.vm.network :private_network, ip: "192.168.56.102"
+        bob_config.vm.hostname = "vagrant-bob"
     end
 end
 
